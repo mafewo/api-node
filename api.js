@@ -1,10 +1,8 @@
 'use strict'
 
-const debug = require('debug')('api-rest:api:routes')
-
 import express from 'express'
-import { ErrorHandler, handlerFatalError } from './ErrorHandler'
-
+import { ErrorHandler } from './ErrorHandler'
+const debug = require('debug')('api-rest:api:routes')
 const api = express.Router()
 
 api.get('/agents', (req, res) => {

@@ -3,13 +3,12 @@
 import ErrorHandler from './ErrorHandler'
 
 class RequestValidatorError extends ErrorHandler {
-  constructor(fields) {
+  constructor (fields) {
     // Overriding both message and status code.
-    super('Request validation failed', 400);
+    super('Request validation failed', 400)
     // Saving custom property.
-    this.fields = fields || {};
+    this.fields = fields || {}
   }
-
 }
 
 export default RequestValidatorError
