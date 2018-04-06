@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production babel-node server.js",
     "start-dev": "nodemon server.js --exec babel-node --presets es2015,stage-2",
     "lint": "standard",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava tests/ --verbose"
   },
   "repository": {
     "type": "git",
@@ -32,5 +32,11 @@
     "chalk": "^2.3.2",
     "debug": "^3.1.0",
     "express": "^4.16.3"
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
   }
 }

@@ -9,7 +9,7 @@ const api = express.Router()
 
 api.get('/agents', (req, res) => {
   debug('debug')
-  res.send({})
+  res.status.send({})
 })
 
 api.get('/agent/:uuid', (req, res, next) => {

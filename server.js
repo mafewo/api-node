@@ -21,9 +21,14 @@ app.use((err, req, res, next) => {
   res.status(err.status).send({error:err.message})
 })
 
-process.on('uncaughtExeption', handlerFatalError)
-process.on('unhandleRejection', handlerFatalError)
+if (!module.parent) {
+  process.on('uncaughtExeption', handlerFatalError)
+  process.on('unhandleRejection', handlerFatalError)
+  
+  server.listen(port, () => {
+    console.log(`${chalk.green('[api-node]')} server listening on port ${port}`)
+  })  
+}
 
-server.listen(port, () => {
-  console.log(`${chalk.green('[api-node]')} server listening on port ${port}`)
-})
+module.exports = server
+
