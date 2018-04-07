@@ -2,21 +2,23 @@
 import http from 'http'
 import chalk from 'chalk'
 import express from 'express'
-import api from './api'
-import { handlerFatalError } from './ErrorHandler'
+import bodyParser from 'body-parser'
+import router from './routes/router'
+import { handlerFatalError } from './libs/ErrorHandler'
 
-const debug = require('debug')('api-rest:api')
+const debug = require('debug')('api-rest:router')
 // import debug from 'debug/api-res:api'
 const port = process.env.PORT || 3000
 const app = express()
 const server = http.createServer(app)
 
-app.use('/api', api)
-
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+app.use('/', router)
 // manejo de errores
 app.use((err, req, res, next) => {
   debug(`Error ${err.message}`)
-  res.status(err.status).send({error: err.message})
+  res.status(err.status || 500).send({error: err.message})
 })
 
 if (!module.parent) {
