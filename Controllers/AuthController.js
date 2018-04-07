@@ -1,13 +1,27 @@
 import { createJWToken } from '../libs/auth'
+import { ErrorHandler } from '../libs/ErrorHandler'
+// import { Joi } from "joi";
+const Joi = require('joi')
 
 class AuthController {
-  constructor (request, response, next) {
+  constructor(request, response, next) {
     this.request = request
     this.response = response
     this.next = next
   }
 
-  login (request) {
+  login(request) {
+
+    const schema = {
+      email: Joi.string().min(3).required()
+    }
+    const resvalidate = Joi.validate(this.request.body, schema)
+    if (resvalidate.error) {
+      return this.next(new ErrorHandler({
+        success: false,
+        message: resvalidate.error.details[0].message
+      }, 400))
+    }
     let { email, password } = this.request.body
     let token = createJWToken({
       sessionData: {
@@ -44,4 +58,4 @@ class AuthController {
         }) */
   }
 }
-module.exports = {AuthController: AuthController}
+module.exports = { AuthController: AuthController }
