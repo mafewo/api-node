@@ -11,17 +11,10 @@ class AuthController {
   }
 
   login(request) {
-
     const schema = {
       email: Joi.string().min(3).required()
     }
-    const resvalidate = Joi.validate(this.request.body, schema)
-    if (resvalidate.error) {
-      return this.next(new ErrorHandler({
-        success: false,
-        message: resvalidate.error.details[0].message
-      }, 400))
-    }
+    this.validate(this.request.body, schema)
     let { email, password } = this.request.body
     let token = createJWToken({
       sessionData: {
@@ -35,6 +28,18 @@ class AuthController {
         success: true,
         token: token
       })
+  }
+
+  validate(req, schema) {
+    const resvalidate = Joi.validate(req, schema)
+    if (resvalidate.error) {
+      return this.next(new ErrorHandler({
+        success: false,
+        message: resvalidate.error.details[0].message
+      }, 400))
+    }
+  }
+}
     /*
       db.User.findByEmail(email)
         .then((user) => (!user) ? Promise.reject("User not found.") : user)
@@ -56,6 +61,4 @@ class AuthController {
               message: err || "Validation failed. Given email and password aren't matching."
             })
         }) */
-  }
-}
 module.exports = { AuthController: AuthController }
