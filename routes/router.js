@@ -6,12 +6,12 @@ import auth from 'express-jwt'
 import { authentication } from '../config/config'
 import { ErrorHandler } from '../libs/ErrorHandler'
 import { AuthController } from '../Controllers/AuthController'
-// const AuthController = require('../Controllers/AuthController').default
+
 const debug = require('debug')('api-rest:api:routes')
 const router = express.Router()
 
 router.post('/login', (req, res, next) => {
-  const authcontroller = new AuthController(req, res)
+  const authcontroller = new AuthController(req, res, next)
   authcontroller.login()
 })
 

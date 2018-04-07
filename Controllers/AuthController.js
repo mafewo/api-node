@@ -1,9 +1,10 @@
 import { createJWToken } from '../libs/auth'
   
 class AuthController {
-  constructor(request, response) {
+  constructor(request, response, next) {
     this.request = request
     this.response = response
+    this.next = next
   }
 
   login (request) {
