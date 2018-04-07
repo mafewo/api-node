@@ -1,7 +1,7 @@
 import { createJWToken } from '../libs/auth'
-  
+
 class AuthController {
-  constructor(request, response, next) {
+  constructor (request, response, next) {
     this.request = request
     this.response = response
     this.next = next
@@ -44,5 +44,4 @@ class AuthController {
         }) */
   }
 }
-var a = new AuthController();
-module.exports = {AuthController: AuthController};
+module.exports = {AuthController: AuthController}

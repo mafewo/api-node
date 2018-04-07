@@ -39,4 +39,4 @@ router.get('/metrics/:uuid/:type', (req, res) => {
   res.send({ uuid, type })
 })
 
-export default router;
+export default router
