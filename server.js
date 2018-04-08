@@ -29,4 +29,4 @@ if (!module.parent) {
     console.log(`${chalk.green('[api-node]')} server listening on port ${port}`)
   })
 }
-export default server;
+export default server

@@ -4,13 +4,13 @@ import { ErrorHandler } from '../libs/ErrorHandler'
 const Joi = require('joi')
 
 class AuthController {
-  constructor(request, response, next) {
+  constructor (request, response, next) {
     this.request = request
     this.response = response
     this.next = next
   }
 
-  login(request) {
+  login (request) {
     const schema = {
       email: Joi.string().min(3).required()
     }
@@ -30,7 +30,7 @@ class AuthController {
       })
   }
 
-  validate(req, schema) {
+  validate (req, schema) {
     const resvalidate = Joi.validate(req, schema)
     if (resvalidate.error) {
       return this.next(new ErrorHandler({
@@ -40,7 +40,7 @@ class AuthController {
     }
   }
 }
-    /*
+/*
       db.User.findByEmail(email)
         .then((user) => (!user) ? Promise.reject("User not found.") : user)
         .then((user) => user.comparePassword(password))
